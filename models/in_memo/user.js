@@ -16,17 +16,26 @@ async function createANewUser(params) {
   return user
 }
 
-async function getUserList() {
+async function getUsers() {
   return users
 }
 
 async function getUserById(userId) {
-  return users.find(u => u._id === userId)
+  return users.find(u => u._id === Number(userId))
 }
 
+async function updateUserById(userId, update) {
+  const user = users.find(u => u._id === userId)
+
+  if (update.name) user.name = update.name
+  if (update.age) user.age = update.age
+}
+
+// 看到23:00
 module.exports = {
   model: User,
   createANewUser,
-  getUserList,
-  getUserById
+  getUsers,
+  getUserById,
+  updateUserById
 }
